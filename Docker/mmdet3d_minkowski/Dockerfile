@@ -51,4 +51,5 @@ RUN conda clean --all \
     && pip install --no-cache-dir -e .
 
 # check what this does - the name?
+# can probably delete, seems to just set the directory that the docker opens in
 WORKDIR /mmdetection3d
