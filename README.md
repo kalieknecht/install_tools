@@ -1,1 +1,2 @@
-# install_tools
+# install_tools repos
+This is a personal repo for various install tools I've made. For now it's just a Dockerfile for using MMDetection3D with the Minkowski Engine, but I thought I'd make a whole repo in case I find myself in the unfortunate position to make another Dockerfile or install tool.
