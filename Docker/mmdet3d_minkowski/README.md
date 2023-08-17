@@ -34,7 +34,8 @@ I am using this to analyze LiDAR point cloud data with the pretrained models in 
 
 After the `docker run` command I open my data directory and open python, when use the following commands:
 
-```from mmdet3d.apis import init_model, inference_detector
+```
+from mmdet3d.apis import init_model, inference_detector
 import numpy as np
 checkpoint_file = {checkpoint_file_path}
 config_file = {config_file_path}
@@ -44,4 +45,5 @@ result, data = inference_detector(model, pcd)
 preds = result.get('pred_instances_3d')
 lidar_boxes = preds.get('bboxes_3d')
 boxes_np = lidar_boxes.cpu().numpy()
-np.save('name',boxes_np)```
+np.save('name',boxes_np)
+```
