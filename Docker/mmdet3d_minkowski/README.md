@@ -3,17 +3,22 @@ This Dockerfile was created to use the [MMDetection3D](https://github.com/open-m
 
 ## Buidling
 Ensure docker version >= 19.03. To build run the following command from `Docker` folder:
+
 ```docker build -t mmdetection3d mmdet3d_minkowski/```
 
 Check that Minkowski Engine is loaded correctly by running the command:
+
 ```docker run mmdetection3d python3 -c "import MinkowskiEngine; print(MinkowskiEngine.__version__)"```
 
 ## Running
 To run, use the command:
+
 ```docker run -it -v /data/dir/on/local/machine:/data_dir_name_on_docker -v /path_to_on_local/mmdetection3d/checkpoints:/mmdetection3d/checkpoints --gpus all --shm-size=8g mmdetection3d```
+
 Note that `-v /path_to_on_local/mmdetection3d/checkpoints:/mmdetection3d/checkpoints` is mounting the locally downloaded checkpoint files to the docker. It might make more sense to change the Dockerfile to download these checkpoints to the mmdetection3d directory in the docker node.
 
 inspired from mmdet command:
+
 ```docker run --gpus all --shm-size=8g -it -v {DATA_DIR}:/mmdetection3d/data mmdetection3d```
 ## Docker run flags
 basic `docker run` command takes the following form:
@@ -28,6 +33,7 @@ basic `docker run` command takes the following form:
     * third field is optional, and is a comma-separated list of optoins, such as ro. 
     * e.g. -v source:destination
 * `shm-size`: Size of /dev/shm. 
+* `--gpus`: seems to be required to use the GPUs on the machine
 
 ## Using MMDetection3D with Minkowski Engine
 I am using this to analyze LiDAR point cloud data with the pretrained models in MMDetection3D. 
