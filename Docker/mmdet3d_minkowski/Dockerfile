@@ -57,10 +57,8 @@ RUN cd checkpoints
 # grep model download urls
 # this is messy sorry I'm not great at grep and regex scares me
 RUN grep -rh 'Weights: ' /mmdetection3d/configs > test.txt
-RUN ls
 RUN grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:-]*(.pth)' test.txt > models.txt
-RUN ls
-RUN pwd
+RUN echo "$(cat models.txt)"
 # download each url into checkpoint folder
 RUN xargs -n 1 curl -O < models.txt
 # now download the project pretrained models
