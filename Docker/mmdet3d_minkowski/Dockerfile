@@ -56,9 +56,9 @@ RUN cd checkpoints
 # grep model download urls
 # this is messy sorry I'm not great at grep and regex scares me
 RUN grep -rh 'Weights: ' /mmdetection3d/configs > test.txt
-RUN grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:-]*(.pth)' test.txt > models.txt
+RUN grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:-]*(.pth)' /mmdetection3d/checkpoints/test.txt > models.txt
 # download each url into checkpoint folder
-RUN xargs -n 1 curl -O < models.txt
+RUN xargs -n 1 curl -O < /mmdetection3d/checkpoints/models.txt
 # now download the project pretrained models
 RUN grep -rh 'https://download' /mmdetection3d/projects  > test2.txt
 RUN grep -Eo '(http|https)://(download)[a-zA-Z0-9./?=_%:-]*(.pth)' test2.txt > projects.txt
