@@ -50,12 +50,14 @@ RUN conda clean --all \
     && cd /mmdetection3d \
     && pip install --no-cache-dir -e .
 # Download pretrained models from config folder
+RUN pwd
 # make checkpoint directory
 RUN mkdir checkpoints
 RUN cd checkpoints
 # grep model download urls
 # this is messy sorry I'm not great at grep and regex scares me
 RUN grep -rh 'Weights: ' /mmdetection3d/configs > test.txt
+RUN ls
 RUN grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:-]*(.pth)' test.txt > models.txt
 # download each url into checkpoint folder
 RUN xargs -n 1 curl -O < /mmdetection3d/checkpoints/models.txt
