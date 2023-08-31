@@ -49,6 +49,8 @@ RUN conda clean --all \
     && git clone https://github.com/open-mmlab/mmdetection3d.git -b main /mmdetection3d \
     && cd /mmdetection3d \
     && pip install --no-cache-dir -e .
+# debug
+RUN pwd
 # Download pretrained models from config folder
 # make checkpoint directory
 RUN mkdir checkpoints
