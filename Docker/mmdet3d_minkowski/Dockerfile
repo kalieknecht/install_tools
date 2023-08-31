@@ -49,7 +49,20 @@ RUN conda clean --all \
     && git clone https://github.com/open-mmlab/mmdetection3d.git -b main /mmdetection3d \
     && cd /mmdetection3d \
     && pip install --no-cache-dir -e .
-
-# check what this does - the name?
+# Download pretrained models from config folder
+# make checkpoint directory
+RUN mkdir checkpoints
+RUN cd checkpoints
+# grep model download urls
+# this is messy sorry I'm not great at grep and regex scares me
+RUN grep -rh 'Weights: ' ../configs > test.txt
+RUN grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:-]*(.pth)' test.txt > models.txt
+# download each url into checkpoint folder
+RUN xargs -n 1 curl -O < models.txt
+# now download the project pretrained models
+RUN grep -rh 'https://download' ../projects  > test2.txt
+RUN grep -Eo '(http|https)://(download)[a-zA-Z0-9./?=_%:-]*(.pth)' test2.txt > projects.txt
+# download project models
+RUN xargs -n 1 curl -O < projects.txt
 # can probably delete, seems to just set the directory that the docker opens in
 WORKDIR /mmdetection3d
