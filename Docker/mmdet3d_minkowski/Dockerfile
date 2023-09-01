@@ -50,8 +50,8 @@ RUN conda clean --all \
     && cd /mmdetection3d \
     && pip install --no-cache-dir -e .
 # Download pretrained models from config folder
-RUN pwd
 # make checkpoint directory
+RUN cd /mmdetection3d
 RUN mkdir checkpoints
 RUN cd checkpoints
 # grep model download urls
@@ -61,10 +61,12 @@ RUN grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:-]*(.pth)' test.txt > models.txt
 #RUN echo "$(cat models.txt)"
 # download each url into checkpoint folder
 #RUN xargs -n 1 curl -O < models.txt
+RUN wget -i models.txt
 # now download the project pretrained models
 RUN grep -rh 'https://download' /mmdetection3d/projects  > test2.txt
 RUN grep -Eo '(http|https)://(download)[a-zA-Z0-9./?=_%:-]*(.pth)' test2.txt > projects.txt
 # download project models
 #RUN xargs -n 1 curl -O < projects.txt
+RUN wget -i projects.txt
 # can probably delete, seems to just set the directory that the docker opens in
 WORKDIR /mmdetection3d
