@@ -60,14 +60,14 @@ RUN grep -rh 'Weights: ' /mmdetection3d/configs > test.txt
 RUN grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:-]*(.pth)' test.txt > models.txt
 # download each url into checkpoint folder
 # if xargs is not available:
-RUN wget -i models.txt
+# RUN wget -i models.txt
 # if xargs is available:
 #RUN xargs -n 1 curl -O < models.txt
 # now download the project pretrained models
 RUN grep -rh 'https://download' /mmdetection3d/projects  > test2.txt
 RUN grep -Eo '(http|https)://(download)[a-zA-Z0-9./?=_%:-]*(.pth)' test2.txt > projects.txt
 # download project models
-RUN wget -i projects.txt
+# RUN wget -i projects.txt
 #RUN xargs -n 1 curl -O < projects.txt
 # can probably delete, seems to just set the directory that the docker opens in
 WORKDIR /mmdetection3d
